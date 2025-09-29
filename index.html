@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Cash Counter</title>
+  <link rel="stylesheet" href="style-mobile.css" />
+</head>
+<body>
+  <!-- SALES SCREEN -->
+  <div id="sales-screen" class="screen active">
+    <div class="top-bar">
+      <div class="total">Rs. <span id="total">0</span></div>
+      <div class="payment" id="payment-status">Select Payment</div>
+    </div>
+
+    <!-- Current Bill Display -->
+    <div id="current-bill" style="background:white;padding:12px;margin:10px;border-radius:12px;display:none;"></div>
+
+    <div class="food-grid" id="food-grid">
+      <!-- Food items loaded here -->
+    </div>
+
+    <div class="action-bar">
+      <button id="btn-cash" class="action-btn cash">CASH</button>
+      <button id="btn-online" class="action-btn online">ONLINE</button>
+      <button id="btn-complete" class="action-btn complete" disabled>✓ COMPLETE</button>
+    </div>
+  </div>
+
+  <!-- MENU & REPORT NAV SCREEN -->
+  <div id="menu-screen" class="screen">
+    <div class="header">
+      <h2>Menu & Reports</h2>
+      <button id="btn-back" class="back-btn">← Back</button>
+    </div>
+    
+    <div style="padding: 20px;">
+      <button id="btn-open-report" class="btn-primary" style="margin-bottom: 20px; background: #2ecc71;">
+        📊 Daily Report
+      </button>
+      
+      <h3 style="margin: 15px 0;">Add Food Item</h3>
+      <input type="text" id="item-name" placeholder="Food name (e.g. Samosa)" maxlength="30" />
+      <input type="number" id="item-price" placeholder="Price (Rs. 10–200)" min="10" max="200" />
+      <button id="btn-add-item" class="btn-primary">+ ADD ITEM</button>
+    </div>
+    
+    <div id="menu-list" class="menu-list"></div>
+  </div>
+
+  <!-- REPORT SCREEN -->
+  <div id="report-screen" class="screen">
+    <div class="header">
+      <h2>Daily Report</h2>
+      <button id="btn-back-report" class="back-btn">← Back</button>
+    </div>
+    <div class="form">
+      <input type="date" id="report-date" />
+      <button id="btn-load-report" class="btn-primary">LOAD REPORT</button>
+    </div>
+    <div id="report-content"></div>
+    <button id="btn-export-pdf" class="btn-primary export">EXPORT AS PDF</button>
+    <button id="btn-clear-data" class="btn-primary" style="background:#e74c3c; margin-top:10px;">
+      🗑️ Clear Data for This Date
+    </button>
+  </div>
+
+  <!-- Floating Menu Button -->
+  <button id="btn-open-menu" class="floating-btn">☰ MENU</button>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script-fast.js"></script>
+  <script src="pdf.js"></script>
+</body>
+</html>
