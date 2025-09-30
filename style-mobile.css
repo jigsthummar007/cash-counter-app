@@ -11,12 +11,15 @@ body {
   background: #f8f9fa;
   touch-action: manipulation;
   overscroll-behavior: none;
+  font-size: 13px;
 }
 
 .screen {
   display: none;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .screen.active {
@@ -24,90 +27,138 @@ body {
   flex-direction: column;
 }
 
-/* ===== COMPACT TOP BAR ===== */
+/* ===== MINI TOP BAR ===== */
 .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 8px 12px;
   background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .total {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   color: #e74c3c;
 }
 
 .payment {
-  font-size: 14px;
-  padding: 5px 10px;
+  font-size: 12px;
+  padding: 4px 8px;
   background: #eee;
-  border-radius: 20px;
+  border-radius: 16px;
 }
 
-/* ===== COMPACT FOOD GRID (FITS 15+ ITEMS) ===== */
-.food-grid {
+/* ===== CURRENT BILL (ULTRA-COMPACT) ===== */
+#current-bill {
+  font-size: 12px;
+  padding: 6px 10px;
+  background: #e8f4fc;
+  margin: 6px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+#current-bill strong {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+#current-bill span {
+  display: inline-block;
+  background: #d1e7ff;
+  padding: 2px 5px;
+  border-radius: 4px;
+  margin: 1px 2px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.remove-item {
+  margin-left: 4px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* ===== SCROLLABLE MIDDLE AREA ===== */
+.scrollable-area {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
-  padding: 0 12px 12px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding-bottom: 70px; /* Space for fixed bottom bar */
+}
+
+/* ===== ULTRA-COMPACT FOOD GRID ===== */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding: 0 10px 10px;
 }
 
 .food-btn {
-  height: 70px;
+  height: 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 4px;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  transition: transform 0.1s;
+  transition: transform 0.08s;
 }
 
 .food-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .food-name {
-  font-size: 14px;
-  margin-bottom: 2px;
-  line-height: 1.2;
+  font-size: 12px;
+  margin-bottom: 1px;
+  line-height: 1.1;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .food-price {
-  font-size: 15px;
+  font-size: 13px;
   color: #27ae60;
   font-weight: bold;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
-/* ===== COMPACT ACTION BAR ===== */
+/* ===== FIXED BOTTOM ACTION BAR ===== */
 .action-bar {
   display: flex;
-  padding: 10px;
+  padding: 8px;
   background: white;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 -1px 6px rgba(0,0,0,0.1);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  flex-shrink: 0;
 }
 
 .action-btn {
   flex: 1;
-  margin: 0 5px;
-  padding: 14px 0;
-  font-size: 16px;
+  margin: 0 4px;
+  padding: 12px 0;
+  font-size: 14px;
   font-weight: bold;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   color: white;
   cursor: pointer;
 }
@@ -116,11 +167,11 @@ body {
 .online { background: #3498db; }
 .complete { 
   background: #e74c3c; 
-  flex: 1.5;
+  flex: 1.4;
 }
 .complete:disabled {
-  background: #95a5a6;
-  opacity: 0.7;
+  background: #bdc3c7;
+  opacity: 0.8;
 }
 
 /* ===== MENU & REPORT SCREENS ===== */
@@ -128,103 +179,98 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 12px;
   background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
 
 .back-btn {
   background: #3498db;
   color: white;
   border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
+  padding: 5px 12px;
+  border-radius: 16px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .form {
-  padding: 16px;
+  padding: 12px;
 }
 
 input {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0;
+  padding: 10px;
+  margin: 6px 0;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
 .btn-primary {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   background: #3498db;
   color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: bold;
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
 .menu-list, #report-content {
-  padding: 0 16px;
+  padding: 0 12px;
   max-height: 40vh;
   overflow-y: auto;
+  font-size: 13px;
 }
 
 .menu-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  background: #f1f1f1;
-  margin: 6px 0;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 8px;
+  background: #f5f5f5;
+  margin: 4px 0;
+  border-radius: 6px;
 }
 
 .delete-btn {
   background: #e74c3c;
   color: white;
   border: none;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
 }
 
 .export {
-  margin: 16px;
+  margin: 12px;
   background: #2ecc71;
+  padding: 12px;
+  font-size: 14px;
 }
 
 /* ===== FLOATING MENU BUTTON ===== */
 .floating-btn {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
-  width: 52px;
-  height: 52px;
+  bottom: 72px; /* Above action bar */
+  right: 12px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: #3498db;
   color: white;
   border: none;
-  font-size: 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-  z-index: 100;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 99;
 }
 
-/* Hide scrollbars for cleaner look */
+/* Hide scrollbars */
 .food-grid::-webkit-scrollbar,
 .menu-list::-webkit-scrollbar,
 #report-content::-webkit-scrollbar {
   display: none;
-}
-
-/* Current Bill Display (compact) */
-#current-bill {
-  font-size: 14px;
-}
-#current-bill span {
-  font-size: 14px !important;
 }
