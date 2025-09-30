@@ -10,25 +10,28 @@
 </head>
 <body>
   <!-- SALES SCREEN -->
-  <div id="sales-screen" class="screen active">
-    <div class="top-bar">
-      <div class="total">Rs. <span id="total">0</span></div>
-      <div class="payment" id="payment-status">Select Payment</div>
-    </div>
+<div id="sales-screen" class="screen active">
+  <div class="top-bar">
+    <div class="total">Rs. <span id="total">0</span></div>
+    <div class="payment" id="payment-status">Select Payment</div>
+  </div>
 
-    <!-- Current Bill Display -->
-    <div id="current-bill" style="background:white;padding:12px;margin:10px;border-radius:12px;display:none;"></div>
+  <div id="current-bill" style="display:none;"></div>
 
+  <!-- Scrollable area for food items -->
+  <div class="scrollable-area">
     <div class="food-grid" id="food-grid">
       <!-- Food items loaded here -->
     </div>
-
-    <div class="action-bar">
-      <button id="btn-cash" class="action-btn cash">CASH</button>
-      <button id="btn-online" class="action-btn online">ONLINE</button>
-      <button id="btn-complete" class="action-btn complete" disabled>✓ COMPLETE</button>
-    </div>
   </div>
+
+  <!-- Action bar is now fixed (outside scrollable area) -->
+  <div class="action-bar">
+    <button id="btn-cash" class="action-btn cash">CASH</button>
+    <button id="btn-online" class="action-btn online">ONLINE</button>
+    <button id="btn-complete" class="action-btn complete" disabled>✓ COMPLETE</button>
+  </div>
+</div>
 
   <!-- MENU & REPORT NAV SCREEN -->
   <div id="menu-screen" class="screen">
