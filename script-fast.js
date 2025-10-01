@@ -202,7 +202,7 @@ function renderMenuList() {
   };
 }
 
-// =============== REPORTS ===============
+// =============== REPORTS WITH DELETE BUTTONS ===============
 function loadReport() {
   const date = document.getElementById('report-date').value;
   if (!date) {
@@ -236,16 +236,38 @@ function loadReport() {
     const paymentColor = payment === 'cash' ? '#27ae60' : '#3498db';
     const items = sale.items.map(i => `${i.name} (x${i.qty})`).join(', ');
     html += `
-      <div style="padding:12px;margin:10px 20px;background:#f9f9f9;border-radius:10px;font-size:14px;">
+      <div style="padding:12px;margin:10px 20px;background:#f9f9f9;border-radius:10px;font-size:14px;position:relative;">
         <div><strong>#${idx + 1} • ${time}</strong></div>
         <div>${items}</div>
         <div style="color:${paymentColor}; margin-top:4px;">
           Rs. ${sale.total} • ${payment.toUpperCase()}
         </div>
+        <!-- DELETE BUTTON -->
+        <button class="delete-transaction" data-id="${sale.id}" 
+          style="position:absolute;top:8px;right:8px;background:#e74c3c;color:white;border:none;border-radius:50%;width:24px;height:24px;font-size:12px;line-height:1;">
+          ✕
+        </button>
       </div>
     `;
   });
   content.innerHTML = html;
+
+  // Add delete handlers
+  content.querySelectorAll('.delete-transaction').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const saleId = btn.dataset.id;
+      
+      if (!confirm('⚠️ Delete this transaction? This cannot be undone.')) return;
+      
+      const sales = load('sales');
+      const updated = sales.filter(s => s.id !== saleId);
+      save('sales', updated);
+      
+      loadReport(); // Refresh report
+      alert('✅ Transaction deleted!');
+    });
+  });
 }
 
 // =============== CLEAR DATA (DATE-WISE) ===============
